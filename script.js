@@ -1,66 +1,55 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // ===== 1. Initialize PageFlip (Book Effect) =====
-    const pageFlip = new PageFlip(document.getElementById('scrapbook'), {
-        width: 800,
-        height: 600,
-        size: 'stretch',
-        maxShadowOpacity: 0.5,
-        showCover: true,
-        mobileScrollSupport: false,
-        draggingClass: 'drag-active',
-        swipeDistance: 30
-    });
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f0e6ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
 
-    // Load all pages
-    pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+#scrapbook {
+    width: 800px;
+    height: 600px;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
 
-    // ===== 2. Initialize Fabric.js Canvases =====
-    const canvases = [];
-    document.querySelectorAll('.page:not(.page-cover):not(.page-back-cover)').forEach((page, index) => {
-        const canvas = new fabric.Canvas(`canvas${index + 1}`, {
-            selection: false,
-            backgroundColor: '#fff'
-        });
-        canvases.push(canvas);
-    });
+.page {
+    background: white;
+    padding: 20px;
+    height: 100%;
+}
 
-    // ===== 3. Add Text Functionality =====
-    document.getElementById('addText').addEventListener('click', () => {
-        const currentPage = pageFlip.getCurrentPageIndex();
-        const text = new fabric.IText('Double-click to edit!', {
-            left: 100,
-            top: 100,
-            fontFamily: 'Arial',
-            fill: 'black'
-        });
-        canvases[currentPage - 1].add(text); // Add to current page
-    });
+.page-cover {
+    background: linear-gradient(135deg, #6e48aa, #9d50bb);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    // ===== 4. Image Upload Functionality =====
-    document.getElementById('imageUpload').addEventListener('change', (e) => {
-        const currentPage = pageFlip.getCurrentPageIndex();
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            fabric.Image.fromURL(event.target.result, (img) => {
-                img.set({ left: 50, top: 50, angle: 0 });
-                canvases[currentPage - 1].add(img);
-            });
-        };
-        reader.readAsDataURL(file);
-    });
+.page-back-cover {
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    // ===== 5. Navigation Buttons (Optional) =====
-    // Add these buttons to your HTML if needed:
-    // <button id="prev-btn">Previous</button>
-    // <button id="next-btn">Next</button>
-    document.getElementById('prev-btn')?.addEventListener('click', () => {
-        pageFlip.flipPrev();
-    });
-    
-    document.getElementById('next-btn')?.addEventListener('click', () => {
-        pageFlip.flipNext();
-    });
-});
+.controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+button, input {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #ccc;
+}
