@@ -8,8 +8,20 @@
     <!-- Fabric.js for drawing/editing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
 </head>
-<body>
-    <div id="scrapbook">
+<body><div id="scrapbook">
+  <div class="page page-cover"> <!-- Cover (optional) -->
+    <h1>My Scrapbook</h1>
+  </div>
+  <div class="page"> <!-- Page 1 -->
+    <canvas id="canvas1"></canvas>
+  </div>
+  <div class="page"> <!-- Page 2 -->
+    <canvas id="canvas2"></canvas>
+  </div>
+  <div class="page page-back-cover"> <!-- Back Cover (optional) -->
+    <p>The End!</p>
+  </div>
+</div>
         <div class="page" id="page1">
             <canvas id="canvas1"></canvas>
         </div>
