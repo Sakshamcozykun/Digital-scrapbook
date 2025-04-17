@@ -1,84 +1,66 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize canvases with Fabric.js
+    // ===== 1. Initialize PageFlip (Book Effect) =====
+    const pageFlip = new PageFlip(document.getElementById('scrapbook'), {
+        width: 800,
+        height: 600,
+        size: 'stretch',
+        maxShadowOpacity: 0.5,
+        showCover: true,
+        mobileScrollSupport: false,
+        draggingClass: 'drag-active',
+        swipeDistance: 30
+    });
+
+    // Load all pages
+    pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+    // ===== 2. Initialize Fabric.js Canvases =====
     const canvases = [];
-    for (let i = 1; i <= 2; i++) {
-        const canvas = new fabric.Canvas(`canvas${i}`, {
+    document.querySelectorAll('.page:not(.page-cover):not(.page-back-cover)').forEach((page, index) => {
+        const canvas = new fabric.Canvas(`canvas${index + 1}`, {
             selection: false,
             backgroundColor: '#fff'
         });
         canvases.push(canvas);
-    }
+    });
 
-    // Add text on button click
+    // ===== 3. Add Text Functionality =====
     document.getElementById('addText').addEventListener('click', () => {
+        const currentPage = pageFlip.getCurrentPageIndex();
         const text = new fabric.IText('Double-click to edit!', {
             left: 100,
             top: 100,
             fontFamily: 'Arial',
             fill: 'black'
         });
-        canvases[0].add(text);
+        canvases[currentPage - 1].add(text); // Add to current page
     });
 
-    // Upload images
+    // ===== 4. Image Upload Functionality =====
     document.getElementById('imageUpload').addEventListener('change', (e) => {
+        const currentPage = pageFlip.getCurrentPageIndex();
         const file = e.target.files[0];
         if (!file) return;
+        
         const reader = new FileReader();
         reader.onload = (event) => {
             fabric.Image.fromURL(event.target.result, (img) => {
                 img.set({ left: 50, top: 50, angle: 0 });
-                canvases[0].add(img);
+                canvases[currentPage - 1].add(img);
             });
         };
         reader.readAsDataURL(file);
     });
 
-    // Initialize page flip (simplified)
-    new PageFlip(document.getElementById('scrapbook'), {
-        width: 800,
-        height: 600,
-        showCover: true
-    }).loadFromHTML(document.querySelectorAll('.page'));
-});
-import { PageFlip } from 'page-flip';
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize PageFlip
-  const pageFlip = new PageFlip(document.getElementById('scrapbook'), {
-    width: 800,     // Base width
-    height: 600,    // Base height
-    size: 'stretch', // Fit to container
-    maxShadowOpacity: 0.5, // Realistic shadow
-    showCover: true,
-    mobileScrollSupport: false // Disable on mobile (better for touch)
-  });
-
-  // Load pages
-  pageFlip.loadFromHTML(document.querySelectorAll('.page'));
-
-  // Optional: Add Fabric.js canvases (for drawing)
-  const canvases = [];
-  document.querySelectorAll('.page:not(.page-cover):not(.page-back-cover)').forEach((page, index) => {
-    const canvas = new fabric.Canvas(`canvas${index + 1}`, {
-      selection: false,
-      backgroundColor: '#fff'
+    // ===== 5. Navigation Buttons (Optional) =====
+    // Add these buttons to your HTML if needed:
+    // <button id="prev-btn">Previous</button>
+    // <button id="next-btn">Next</button>
+    document.getElementById('prev-btn')?.addEventListener('click', () => {
+        pageFlip.flipPrev();
     });
-    canvases.push(canvas);
-  });
-});
-// In the PageFlip config:
-const pageFlip = new PageFlip(document.getElementById('scrapbook'), {
-  // ... previous settings ...
-  draggingClass: 'drag-active', // Class added during drag
-  swipeDistance: 30             // Minimum swipe distance to flip
-});
-
-// Flip on button clicks (optional)
-document.getElementById('next-btn').addEventListener('click', () => {
-  pageFlip.flipNext();
-});
-
-document.getElementById('prev-btn').addEventListener('click', () => {
-  pageFlip.flipPrev();
+    
+    document.getElementById('next-btn')?.addEventListener('click', () => {
+        pageFlip.flipNext();
+    });
 });
