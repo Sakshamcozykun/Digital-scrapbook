@@ -41,3 +41,44 @@ document.addEventListener('DOMContentLoaded', () => {
         showCover: true
     }).loadFromHTML(document.querySelectorAll('.page'));
 });
+import { PageFlip } from 'page-flip';
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize PageFlip
+  const pageFlip = new PageFlip(document.getElementById('scrapbook'), {
+    width: 800,     // Base width
+    height: 600,    // Base height
+    size: 'stretch', // Fit to container
+    maxShadowOpacity: 0.5, // Realistic shadow
+    showCover: true,
+    mobileScrollSupport: false // Disable on mobile (better for touch)
+  });
+
+  // Load pages
+  pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+  // Optional: Add Fabric.js canvases (for drawing)
+  const canvases = [];
+  document.querySelectorAll('.page:not(.page-cover):not(.page-back-cover)').forEach((page, index) => {
+    const canvas = new fabric.Canvas(`canvas${index + 1}`, {
+      selection: false,
+      backgroundColor: '#fff'
+    });
+    canvases.push(canvas);
+  });
+});
+// In the PageFlip config:
+const pageFlip = new PageFlip(document.getElementById('scrapbook'), {
+  // ... previous settings ...
+  draggingClass: 'drag-active', // Class added during drag
+  swipeDistance: 30             // Minimum swipe distance to flip
+});
+
+// Flip on button clicks (optional)
+document.getElementById('next-btn').addEventListener('click', () => {
+  pageFlip.flipNext();
+});
+
+document.getElementById('prev-btn').addEventListener('click', () => {
+  pageFlip.flipPrev();
+});
