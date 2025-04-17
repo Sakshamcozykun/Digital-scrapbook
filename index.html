@@ -3,39 +3,31 @@
 <head>
     <title>Digital Scrapbook</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Fabric.js for drawing/editing -->
+    <!-- Load libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
-    <!-- PageFlip.js (correct version) -->
     <script src="https://cdn.jsdelivr.net/npm/pageflip@2/dist/js/pageflip.min.js"></script>
 </head>
 <body>
     <div id="scrapbook">
-        <!-- Front Cover -->
         <div class="page page-cover">
             <h1>My Scrapbook</h1>
         </div>
-        
-        <!-- Page 1 -->
         <div class="page">
             <canvas id="canvas1"></canvas>
         </div>
-        
-        <!-- Page 2 -->
         <div class="page">
             <canvas id="canvas2"></canvas>
         </div>
-        
-        <!-- Back Cover -->
         <div class="page page-back-cover">
             <p>The End!</p>
         </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
         <input type="file" id="imageUpload" accept="image/*">
         <button id="addText">Add Text</button>
-        <button id="addPage">Add Page</button>
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn">Next</button>
     </div>
 
     <script src="script.js"></script>
