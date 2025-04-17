@@ -3,36 +3,41 @@
 <head>
     <title>Digital Scrapbook</title>
     <link rel="stylesheet" href="style.css">
-    <!-- PageFlip library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pageflip/1.0.2/js/pageflip.min.js"></script>
     <!-- Fabric.js for drawing/editing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
-</head>
+    <!-- PageFlip.js (correct version) -->
     <script src="https://cdn.jsdelivr.net/npm/pageflip@2/dist/js/pageflip.min.js"></script>
-<body><div id="scrapbook">
-  <div class="page page-cover"> <!-- Cover (optional) -->
-    <h1>My Scrapbook</h1>
-  </div>
-  <div class="page"> <!-- Page 1 -->
-    <canvas id="canvas1"></canvas>
-  </div>
-  <div class="page"> <!-- Page 2 -->
-    <canvas id="canvas2"></canvas>
-  </div>
-  <div class="page page-back-cover"> <!-- Back Cover (optional) -->
-    <p>The End!</p>
-  </div>
-</div>
-        <div class="page" id="page1">
+</head>
+<body>
+    <div id="scrapbook">
+        <!-- Front Cover -->
+        <div class="page page-cover">
+            <h1>My Scrapbook</h1>
+        </div>
+        
+        <!-- Page 1 -->
+        <div class="page">
             <canvas id="canvas1"></canvas>
         </div>
-        <div class="page" id="page2">
+        
+        <!-- Page 2 -->
+        <div class="page">
             <canvas id="canvas2"></canvas>
         </div>
+        
+        <!-- Back Cover -->
+        <div class="page page-back-cover">
+            <p>The End!</p>
+        </div>
     </div>
-    <input type="file" id="imageUpload" accept="image/*">
-    <button id="addText">Add Text</button>
-    <button id="addPage">Add Page</button>
+
+    <!-- Controls -->
+    <div class="controls">
+        <input type="file" id="imageUpload" accept="image/*">
+        <button id="addText">Add Text</button>
+        <button id="addPage">Add Page</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
