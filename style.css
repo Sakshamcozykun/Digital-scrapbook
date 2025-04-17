@@ -1,143 +1,35 @@
-/* Base Styles */
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0e6ff; /* Light purple background */
+    padding: 20px;
+    font-family: Arial;
+    background: #f5f5f5;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
 }
 
-/* Toolbar/Controls Styling */
-.controls {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.controls button, 
-.controls input[type="file"] {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 20px;
-    background: #6e48aa;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.controls button:hover {
-    background: #9d50bb;
-    transform: translateY(-2px);
-}
-
-.controls input[type="file"] {
-    background: #5a3d8a;
-    padding: 8px;
-}
-
-/* Notebook Styling */
 #scrapbook {
-    width: 90vw;
-    max-width: 800px;
-    height: 70vh;
-    min-height: 500px;
-    margin: 20px auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
-/* Page Styling */
 .page {
     background: white;
     padding: 20px;
-    box-sizing: border-box;
-    position: relative;
-    height: 100%;
-    overflow: hidden;
 }
 
-/* Paper Texture Effect */
-.page:not(.page-cover):not(.page-back-cover) {
-    background-image: linear-gradient(#eee 0.1em, transparent 0.1em);
-    background-size: 100% 1.2em;
-    background-position: 0 1.5em;
-    line-height: 1.5em;
-}
-
-/* Cover Designs */
 .page-cover {
     background: linear-gradient(135deg, #6e48aa, #9d50bb);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
 }
 
-.page-cover h1 {
-    font-size: 3rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 0;
-    padding: 0 20px;
-}
-
-.page-back-cover {
-    background: #f9f9f9;
+.controls {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-style: italic;
-    color: #666;
-}
-
-/* Canvas Styling */
-canvas {
-    width: 100% !important;
-    height: 100% !important;
-    display: block;
-    cursor: crosshair;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    #scrapbook {
-        width: 95vw;
-        height: 80vh;
-        min-height: 400px;
-    }
-    
-    .controls {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .page-cover h1 {
-        font-size: 2rem;
-    }
-}
-
-/* Page Flip Animation Enhancements */
-.drag-active {
-    cursor: grab;
-}
-
-/* Notebook Spine Effect (visual detail) */
-#scrapbook::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    transform: translateX(-50%);
+    gap: 10px;
+    margin-top: 10px;
 }
